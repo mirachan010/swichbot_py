@@ -43,7 +43,10 @@ class SwitchBot:
             res.raise_for_status()
             deviceList = json.loads(res.text)
             # 取得データをjsonファイルに書き込み
-            print(deviceList)
+            print(deviceList["body"]["infraredRemoteList"])
+            with open(deviceListJson, mode='wt', encoding='utf-8') as f:
+                json.dump(deviceList["body"]["infraredRemoteList"],
+                          f, ensure_ascii=False, indent=2)
         except requests.exceptions.RequestException as e:
             print('response error:', e)
 
